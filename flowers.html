@@ -1,0 +1,955 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#fff0e6">
+<title>Flowers for Angel💐</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Georgia, serif;
+    background: linear-gradient(145deg,#fff1e7,#f8d9dd,#ffe8bd);
+    overflow-x: hidden;
+    color: #87485b;
+}
+
+.page {
+    min-height: 100svh;
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    padding: 25px 20px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.top-label {
+    font-family: Arial,sans-serif;
+    letter-spacing: 3px;
+    font-size: 10px;
+    color: #ad7780;
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: clamp(30px,9vw,43px);
+    font-weight: normal;
+    font-style: italic;
+    line-height: 1.2;
+    margin-top: 20px;
+    color: #934b64;
+}
+
+.intro {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #a36c77;
+    margin-top: 12px;
+    max-width: 290px;
+}
+
+.flower-icon {
+    font-size: 26px;
+    margin-top: 15px;
+}
+
+/* GIFT AREA */
+
+.gift-area {
+    height: 360px;
+    width: 100%;
+    max-width: 350px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    transition: opacity .5s;
+}
+
+.gift-area.locked {
+    opacity: .3;
+    pointer-events: none;
+}
+
+.gift {
+    position: relative;
+    width: 260px;
+    height: 145px;
+    margin-top: 170px;
+    z-index: 3;
+}
+
+.box {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 125px;
+    border-radius: 8px 8px 20px 20px;
+    background: linear-gradient(135deg,#c65f7b,#e69bad);
+    box-shadow: 0 20px 35px #a84d6935;
+    border: 2px solid #f9c4cc;
+}
+
+.box::after {
+    content: "A LITTLE GIFT FOR YOU ♡";
+    position: absolute;
+    top: 52px;
+    left: 0;
+    width: 100%;
+    color: #fff3dc;
+    letter-spacing: 2px;
+    font-family: Arial,sans-serif;
+    font-size: 10px;
+}
+
+.box-ribbon {
+    position: absolute;
+    height: 100%;
+    width: 32px;
+    background: #f6d27e;
+    left: 114px;
+}
+
+.lid {
+    position: absolute;
+    width: 280px;
+    height: 37px;
+    bottom: 115px;
+    left: -10px;
+    border-radius: 9px;
+    background: linear-gradient(135deg,#e995a8,#c85f7d);
+    border: 2px solid #ffd6d9;
+    transform-origin: left bottom;
+    transition: 1s;
+    z-index: 4;
+}
+
+.bow {
+    position: absolute;
+    top: -22px;
+    left: 110px;
+    width: 55px;
+    height: 25px;
+    border: 6px solid #ffe4a0;
+    border-radius: 50%;
+}
+
+.bow::after {
+    content: "";
+    position: absolute;
+    width: 40px;
+    height: 25px;
+    border: 6px solid #ffe4a0;
+    border-radius: 50%;
+    left: 23px;
+    top: -6px;
+}
+
+/* BOUQUET */
+
+.bouquet {
+    position: absolute;
+    width: 320px;
+    height: 330px;
+    bottom: 90px;
+    left: 50%;
+    transform: translate(-50%,160px) scale(.45);
+    opacity: 0;
+    transition: 1.5s cubic-bezier(.17,.67,.25,1.3);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.bouquet svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.open .bouquet {
+    opacity: 1;
+    transform: translate(-50%,-5px) scale(1);
+}
+
+.open .lid {
+    transform: translate(-35px,-120px) rotate(-35deg);
+}
+
+.open .bow {
+    opacity: 0;
+}
+
+/* BUTTON */
+
+.open-button {
+    border: none;
+    padding: 17px 38px;
+    border-radius: 50px;
+    color: white;
+    background: linear-gradient(135deg,#a74767,#df819b);
+    box-shadow: 0 10px 25px #a7476745;
+    font-size: 15px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.open-button:active {
+    transform: scale(.9);
+}
+
+.open-button:disabled {
+    opacity: .35;
+    cursor: not-allowed;
+}
+
+/* CAPTION */
+
+.caption {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 1s .8s;
+    margin-top: 25px;
+}
+
+.open .caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.caption h2 {
+    font-size: 25px;
+    line-height: 1.4;
+    font-weight: normal;
+    font-style: italic;
+    color: #984c67;
+}
+
+.caption p {
+    font-family: Arial,sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 12px;
+    color: #b27b80;
+}
+
+.footer {
+    margin-top: auto;
+    padding-top: 25px;
+    font-size: 11px;
+    color: #ac7b83;
+    letter-spacing: 1px;
+}
+
+/* FLOATING DECORATIONS */
+
+.sparkle {
+    position: absolute;
+    color: #d58a9b;
+    font-size: 22px;
+    opacity: .65;
+    animation: float 4s ease-in-out infinite;
+    pointer-events: none;
+}
+
+.s1 {top:20%;left:8%;}
+.s2 {top:34%;right:7%;animation-delay:1s;}
+.s3 {top:65%;left:5%;animation-delay:2s;}
+.s4 {top:72%;right:6%;animation-delay:1.5s;}
+
+@keyframes float {
+    0%,100% {transform:translateY(0) rotate(0deg);}
+    50% {transform:translateY(-18px) rotate(15deg);}
+}
+
+/* QUESTION SCREEN */
+
+.question-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+    background: linear-gradient(145deg,#fff1e7,#f8d9dd,#ffe8bd);
+    transition: opacity .8s, visibility .8s;
+}
+
+.question-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.envelope {
+    font-size: 65px;
+    animation: float 3s infinite;
+}
+
+.small-title {
+    font-family: Arial,sans-serif;
+    letter-spacing: 3px;
+    font-size: 10px;
+    color: #ad7780;
+    margin-top: 25px;
+}
+
+.question-screen h2 {
+    font-size: 30px;
+    font-weight: normal;
+    font-style: italic;
+    line-height: 1.5;
+    color: #934b64;
+    margin: 22px 0;
+}
+
+.description {
+    font-size: 14px;
+    color: #a36c77;
+    line-height: 1.8;
+}
+
+.question-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.question-buttons button {
+    border: none;
+    border-radius: 40px;
+    padding: 15px 32px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.question-buttons button:active {
+    transform: scale(.93);
+}
+
+.yes-btn {
+    background: linear-gradient(135deg,#a74767,#df819b);
+    color: white;
+    box-shadow: 0 8px 20px #a7476740;
+    position: relative;
+    overflow: hidden;
+}
+
+.no-btn {
+    background: white;
+    color: #a74767;
+    box-shadow: 0 5px 15px #a7476715;
+    position: relative;
+    z-index: 30;
+    touch-action: none;
+}
+
+.no-btn.running {
+    position: fixed;
+    margin: 0;
+    transition: left .18s ease, top .18s ease;
+}
+
+.response {
+    min-height: 50px;
+    margin-top: 25px;
+    color: #a74767;
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 300px;
+}
+
+/* YES SURPRISE TRANSITION */
+
+.question-screen.surprise {
+    animation: surpriseFlash 1.5s ease forwards;
+}
+
+@keyframes surpriseFlash {
+    0% {background:#fff0e6;transform:scale(1);}
+    35% {background:#ffd5e1;transform:scale(1.04);}
+    100% {background:#fff0e6;transform:scale(1);}
+}
+
+/* HEARTS */
+
+.heart {
+    position: fixed;
+    bottom: -30px;
+    font-size: 25px;
+    pointer-events: none;
+    z-index: 100;
+    animation: heartRise 2.5s ease-out forwards;
+}
+
+@keyframes heartRise {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(.5) rotate(0);
+    }
+    20% {opacity:1;}
+    100% {
+        opacity:0;
+        transform:translateY(-100vh) scale(1.5) rotate(40deg);
+    }
+}
+
+/* PAGE FLASH */
+
+.page.reveal {
+    animation: revealPage 1s ease;
+}
+
+@keyframes revealPage {
+    0% {filter:brightness(1);transform:scale(1);}
+    35% {filter:brightness(1.2);transform:scale(1.025);}
+    100% {filter:brightness(1);transform:scale(1);}
+}
+
+/* BOUQUET REVEAL */
+
+.open .bouquet {
+    animation: flowerReveal 1.7s cubic-bezier(.17,.67,.25,1.3) forwards;
+}
+
+@keyframes flowerReveal {
+    0% {
+        opacity: 0;
+        transform: translate(-50%,160px) scale(.3) rotate(-12deg);
+    }
+    55% {
+        opacity: 1;
+        transform: translate(-50%,-25px) scale(1.08) rotate(5deg);
+    }
+    75% {
+        transform: translate(-50%,5px) scale(.96) rotate(-3deg);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%,-5px) scale(1) rotate(0);
+    }
+}
+
+/* SPARKLE EXPLOSION */
+
+.burst {
+    position: fixed;
+    z-index: 99;
+    pointer-events: none;
+    font-size: 25px;
+    animation: burstAnimation 1.5s ease-out forwards;
+}
+
+@keyframes burstAnimation {
+    0% {
+        opacity: 1;
+        transform: translate(0,0) scale(.3) rotate(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(var(--x),var(--y)) scale(1.7) rotate(180deg);
+    }
+}
+
+/* RESPONSIVE */
+
+@media(max-width:360px) {
+    .gift-area {transform:scale(.88);}
+    h1 {font-size:29px;}
+    .question-screen h2 {font-size:26px;}
+    .question-buttons button {padding:14px 26px;}
+}
+
+@media(max-height:700px) {
+    .page {padding-top:10px;}
+    .gift-area {height:300px;}
+    .gift {margin-top:140px;}
+    .bouquet {width:280px;height:290px;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- QUESTION SCREEN -->
+
+<div class="question-screen" id="questionScreen">
+
+    <div class="envelope">💌</div>
+
+    <div class="small-title">
+        A LITTLE QUESTION FOR YOU
+    </div>
+
+    <h2>
+        Angel,<br>
+        would you accept<br>
+        this little surprise? ♡
+    </h2>
+
+    <p class="description">
+        I prepared something beautiful<br>
+        just for you.
+    </p>
+
+    <div class="question-buttons">
+
+        <button class="yes-btn" onclick="answerYes()">
+            YES 💖
+        </button>
+
+        <button class="no-btn" id="noButton" onclick="runAway()">
+            NO 🥺
+        </button>
+
+    </div>
+
+    <div class="response" id="response"></div>
+
+</div>
+
+
+<!-- MAIN WEBSITE -->
+
+<main class="page" id="page">
+
+    <div class="sparkle s1">✧</div>
+    <div class="sparkle s2">♡</div>
+    <div class="sparkle s3">✿</div>
+    <div class="sparkle s4">✧</div>
+
+    <div class="top-label">
+        A SPECIAL GIFT FOR YOU
+    </div>
+
+    <h1>
+        Just for You,<br>
+        Angel♡
+    </h1>
+
+    <p class="intro">
+        Some flowers are more than just flowers.
+        They're little reminders that someone is thinking of you.
+    </p>
+
+    <div class="flower-icon">🌷 ✨ 🌼</div>
+
+
+    <!-- GIFT BOX -->
+
+    <div class="gift-area locked" id="giftArea">
+
+        <div class="bouquet">
+
+            <svg viewBox="0 0 340 340"
+                 xmlns="http://www.w3.org/2000/svg">
+
+                <!-- STEMS -->
+                <g stroke="#477c45" stroke-width="4" fill="none">
+                    <path d="M170 300 Q45 130 35 60"/>
+                    <path d="M170 300 Q90 130 80 35"/>
+                    <path d="M170 300 Q130 130 130 20"/>
+                    <path d="M170 300 L170 35"/>
+                    <path d="M170 300 Q210 130 210 20"/>
+                    <path d="M170 300 Q250 130 260 35"/>
+                    <path d="M170 300 Q300 170 305 70"/>
+                    <path d="M170 300 Q70 180 15 140"/>
+                    <path d="M170 300 Q260 180 325 140"/>
+                </g>
+
+                <!-- LEAVES -->
+                <g fill="#518849">
+                    <path d="M160 265 Q55 185 30 220 Q90 270 160 265Z"/>
+                    <path d="M180 260 Q280 170 310 210 Q245 275 180 260Z"/>
+                    <path d="M140 220 Q45 145 20 175 Q80 235 140 220Z"/>
+                    <path d="M195 215 Q285 140 320 175 Q255 240 195 215Z"/>
+                    <path d="M150 190 Q70 110 45 135 Q100 200 150 190Z"/>
+                    <path d="M190 185 Q265 105 300 140 Q235 210 190 185Z"/>
+                    <path d="M160 155 Q90 90 75 110 Q120 170 160 155Z"/>
+                    <path d="M185 155 Q245 90 265 110 Q225 170 185 155Z"/>
+                </g>
+
+                <!-- YELLOW TULIPS -->
+                <g fill="#ffce31" stroke="#e9a421" stroke-width="1.5">
+
+                    <path d="M35 75 Q5 43 20 15 Q38 30 40 3 Q55 30 70 10 Q83 48 35 75Z"/>
+                    <path d="M80 43 Q50 15 65 -8 Q80 8 85 -10 Q100 12 115 -5 Q125 28 80 43Z"/>
+                    <path d="M130 30 Q100 3 115 -22 Q130 -5 135 -25 Q150 -3 165 -20 Q175 10 130 30Z"/>
+                    <path d="M170 55 Q140 25 155 0 Q170 17 175 -5 Q190 17 205 0 Q215 35 170 55Z"/>
+                    <path d="M215 35 Q185 7 200 -18 Q215 0 220 -20 Q235 2 250 -15 Q260 20 215 35Z"/>
+                    <path d="M260 65 Q230 35 245 8 Q260 25 265 0 Q280 25 295 7 Q305 42 260 65Z"/>
+                    <path d="M305 105 Q275 75 290 48 Q305 65 310 40 Q325 65 340 48 Q350 83 305 105Z"/>
+                    <path d="M60 125 Q30 95 45 70 Q60 85 65 60 Q80 85 95 65 Q105 100 60 125Z"/>
+                    <path d="M120 105 Q90 75 105 50 Q120 65 125 40 Q140 65 155 45 Q165 80 120 105Z"/>
+                    <path d="M185 115 Q155 85 170 60 Q185 75 190 50 Q205 75 220 55 Q230 90 185 115Z"/>
+                    <path d="M250 125 Q220 95 235 70 Q250 85 255 60 Q270 85 285 65 Q295 100 250 125Z"/>
+
+                </g>
+
+                <!-- TULIP HIGHLIGHTS -->
+                <g fill="#fff0a0">
+                    <ellipse cx="35" cy="35" rx="5" ry="15"/>
+                    <ellipse cx="80" cy="15" rx="5" ry="13"/>
+                    <ellipse cx="130" cy="5" rx="5" ry="13"/>
+                    <ellipse cx="170" cy="20" rx="5" ry="13"/>
+                    <ellipse cx="215" cy="5" rx="5" ry="13"/>
+                    <ellipse cx="260" cy="30" rx="5" ry="13"/>
+                    <ellipse cx="60" cy="95" rx="5" ry="12"/>
+                    <ellipse cx="120" cy="75" rx="5" ry="12"/>
+                    <ellipse cx="185" cy="85" rx="5" ry="12"/>
+                    <ellipse cx="250" cy="95" rx="5" ry="12"/>
+                </g>
+
+                <!-- AFRICAN AMMOCHARIS-INSPIRED FLOWERS -->
+                <g fill="#fff3ed" stroke="#e8a0ad" stroke-width="1.4">
+
+                    <path d="M20 145 Q-5 115 8 92 Q25 105 28 125 Q40 98 53 100 Q55 128 35 148Z"/>
+                    <path d="M70 165 Q45 135 58 112 Q75 125 78 145 Q90 118 103 120 Q105 148 85 168Z"/>
+                    <path d="M125 150 Q100 120 113 97 Q130 110 133 130 Q145 103 158 105 Q160 133 140 153Z"/>
+                    <path d="M190 160 Q165 130 178 107 Q195 120 198 140 Q210 113 223 115 Q225 143 205 163Z"/>
+                    <path d="M250 155 Q225 125 238 102 Q255 115 258 135 Q270 108 283 110 Q285 138 265 158Z"/>
+                    <path d="M290 175 Q265 145 278 122 Q295 135 298 155 Q310 128 323 130 Q325 158 305 178Z"/>
+
+                </g>
+
+                <!-- FLOWER CENTERS -->
+                <g fill="#d85e85">
+                    <circle cx="28" cy="130" r="5"/>
+                    <circle cx="80" cy="150" r="5"/>
+                    <circle cx="135" cy="135" r="5"/>
+                    <circle cx="200" cy="145" r="5"/>
+                    <circle cx="260" cy="140" r="5"/>
+                    <circle cx="300" cy="160" r="5"/>
+                </g>
+
+                <!-- SMALL FLOWERS -->
+                <g fill="#fff8ed">
+                    <circle cx="42" cy="105" r="5"/>
+                    <circle cx="52" cy="115" r="5"/>
+                    <circle cx="42" cy="125" r="5"/>
+                    <circle cx="90" cy="85" r="5"/>
+                    <circle cx="100" cy="95" r="5"/>
+                    <circle cx="90" cy="105" r="5"/>
+                    <circle cx="235" cy="75" r="5"/>
+                    <circle cx="245" cy="85" r="5"/>
+                    <circle cx="235" cy="95" r="5"/>
+                    <circle cx="285" cy="105" r="5"/>
+                    <circle cx="295" cy="115" r="5"/>
+                    <circle cx="285" cy="125" r="5"/>
+                </g>
+
+                <g fill="#e88ca6">
+                    <circle cx="47" cy="115" r="2.5"/>
+                    <circle cx="95" cy="95" r="2.5"/>
+                    <circle cx="240" cy="85" r="2.5"/>
+                    <circle cx="290" cy="115" r="2.5"/>
+                </g>
+
+                <!-- FLOWER WRAPPING -->
+                <path d="M45 175 Q170 205 295 175 L225 325 Q170 350 115 325Z"
+                      fill="#d98d9d"
+                      stroke="#fff0dc"
+                      stroke-width="3"/>
+
+                <path d="M45 175 Q170 235 295 175 L170 300Z"
+                      fill="#f1c4c5"
+                      opacity=".8"/>
+
+                <path d="M115 205 L170 330 L225 205"
+                      fill="none"
+                      stroke="#fff0e4"
+                      stroke-width="4"/>
+
+                <!-- GOLD RIBBON -->
+                <path d="M170 265 Q110 225 115 270 Q145 300 170 275 Q195 300 225 270 Q230 225 170 265Z"
+                      fill="#f8d36c"
+                      stroke="#d4a43d"
+                      stroke-width="2"/>
+
+                <circle cx="170" cy="272" r="9"
+                        fill="#fff1ae"
+                        stroke="#d4a43d"
+                        stroke-width="2"/>
+
+            </svg>
+
+        </div>
+
+        <div class="gift">
+
+            <div class="box">
+                <div class="box-ribbon"></div>
+            </div>
+
+            <div class="lid">
+                <div class="bow"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- OPEN GIFT -->
+
+    <button class="open-button"
+            id="openButton"
+            onclick="toggleGift()"
+            disabled>
+        Open Your Gift ♡
+    </button>
+
+
+    <!-- MESSAGE -->
+
+    <div class="caption">
+
+        <h2>
+            Flower's for<br>
+            Angelica Rondaris
+        </h2>
+
+        <p>JUST FOR YOU ✨</p>
+
+    </div>
+
+    <div class="footer">
+        created by: Nateee ♡
+    </div>
+
+</main>
+
+
+<script>
+
+let isOpen = false;
+let accepted = false;
+
+const page = document.getElementById("page");
+const button = document.getElementById("openButton");
+const questionScreen = document.getElementById("questionScreen");
+const response = document.getElementById("response");
+const giftArea = document.getElementById("giftArea");
+const noButton = document.getElementById("noButton");
+
+
+/* YES BUTTON */
+
+function answerYes() {
+
+    if (accepted) return;
+
+    accepted = true;
+
+    noButton.style.display = "none";
+
+    response.innerHTML =
+        "Yay!! I knew you would say yes! You're special! 💗🌷";
+
+    createHearts();
+
+    questionScreen.classList.add("surprise");
+
+    setTimeout(() => {
+
+        questionScreen.classList.add("hidden");
+
+        giftArea.classList.remove("locked");
+
+        button.disabled = false;
+
+        page.classList.add("reveal");
+
+        setTimeout(() => {
+            page.classList.remove("reveal");
+        }, 1000);
+
+    }, 1500);
+
+}
+
+
+/* NO BUTTON RUNS AWAY */
+
+function runAway() {
+
+    if (accepted) return;
+
+    const padding = 15;
+
+    const maxX = window.innerWidth -
+                 noButton.offsetWidth - padding;
+
+    const maxY = window.innerHeight -
+                 noButton.offsetHeight - padding;
+
+    const randomX = Math.max(
+        padding,
+        Math.random() * Math.max(1, maxX)
+    );
+
+    const randomY = Math.max(
+        padding,
+        Math.random() * Math.max(1, maxY)
+    );
+
+    noButton.classList.add("running");
+
+    noButton.style.left = randomX + "px";
+    noButton.style.top = randomY + "px";
+
+    const messages = [
+        "Hehe! You can't catch me! 😂",
+        "Nope! Try YES instead! 💗",
+        "Oops! Too slow! 🥺",
+        "The YES button is waiting! 🌷",
+        "Are you sure? I'm running away! 💕",
+        "Catch me if you can! 😂"
+    ];
+
+    response.innerHTML =
+        messages[Math.floor(Math.random() * messages.length)];
+
+}
+
+
+/* DESKTOP AND MOBILE NO BUTTON */
+
+noButton.addEventListener("mouseenter", runAway);
+
+noButton.addEventListener("touchstart", function(e) {
+
+    e.preventDefault();
+
+    runAway();
+
+}, { passive: false });
+
+
+/* FLOATING HEARTS */
+
+function createHearts() {
+
+    const hearts = ["💗", "💕", "♡", "🌸", "✨"];
+
+    for (let i = 0; i < 25; i++) {
+
+        setTimeout(() => {
+
+            const heart = document.createElement("div");
+
+            heart.className = "heart";
+
+            heart.innerHTML =
+                hearts[Math.floor(Math.random() * hearts.length)];
+
+            heart.style.left = Math.random() * 100 + "vw";
+
+            heart.style.animationDuration =
+                (2 + Math.random() * 2) + "s";
+
+            document.body.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 4000);
+
+        }, i * 90);
+
+    }
+
+}
+
+
+/* SPARKLE EXPLOSION */
+
+function createBurst() {
+
+    const symbols = ["✨", "🌟", "💖", "🌸", "✿"];
+
+    for (let i = 0; i < 30; i++) {
+
+        const sparkle = document.createElement("div");
+
+        sparkle.className = "burst";
+
+        sparkle.innerHTML =
+            symbols[Math.floor(Math.random() * symbols.length)];
+
+        sparkle.style.left = "50%";
+        sparkle.style.top = "50%";
+
+        sparkle.style.setProperty(
+            "--x",
+            (Math.random() - .5) * window.innerWidth + "px"
+        );
+
+        sparkle.style.setProperty(
+            "--y",
+            (Math.random() - .5) * window.innerHeight + "px"
+        );
+
+        document.body.appendChild(sparkle);
+
+        setTimeout(() => sparkle.remove(), 1600);
+
+    }
+
+}
+
+
+/* OPEN AND CLOSE GIFT */
+
+function toggleGift() {
+
+    if (!accepted) return;
+
+    isOpen = !isOpen;
+
+    page.classList.toggle("open", isOpen);
+
+    if (isOpen) {
+
+        createBurst();
+
+        createHearts();
+
+        page.classList.add("reveal");
+
+        setTimeout(() => {
+            page.classList.remove("reveal");
+        }, 1000);
+
+        button.innerHTML = "Close Your Gift ♡";
+
+    } else {
+
+        button.innerHTML = "Open Your Gift ♡";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
